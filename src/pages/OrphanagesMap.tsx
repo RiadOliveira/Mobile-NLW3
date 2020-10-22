@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from 'react'
+import React, { useState} from 'react'
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import MapView, { Marker, Callout, PROVIDER_GOOGLE} from 'react-native-maps'
 import mapMarker from '../images/map-marker.png'
@@ -22,7 +22,7 @@ export default function OrphanagesMap () {
     api.get('/orphanages').then(res => {
         setOrphanages(res.data)
     })
-  }, [])
+  })
 
   const navigation = useNavigation();
 
@@ -36,7 +36,11 @@ export default function OrphanagesMap () {
 
   return (
     <View style={styles.container}>
-      <MapView provider={PROVIDER_GOOGLE} style={styles.map} initialRegion={{latitude: -4.9499839, longitude: -37.1245751, latitudeDelta: 0.008,longitudeDelta: 0.008}}>
+      <MapView 
+        provider={PROVIDER_GOOGLE} 
+        style={styles.map} 
+        initialRegion={{latitude: -4.9499839, longitude: -37.1245751, latitudeDelta: 0.008,longitudeDelta: 0.008}}
+      >
         {orphanages.map(orphanage => {
           return (
             <Marker 
